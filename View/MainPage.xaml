@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:MicaMatherialGhibli"
+    xmlns:local1="using:MicaMatherialGhibli.Model"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     muxc:BackdropMaterial.ApplyToRootOrPageBackground="True"
@@ -39,9 +40,10 @@
         </Border>
         <NavigationView
             x:Name="NavigationViewControl"
+            BackRequested="NavigationViewControl_BackRequested"
             Canvas.ZIndex="0"
-            Header="Title"
             IsBackButtonVisible="Visible"
+            IsBackEnabled="True"
             IsSettingsVisible="False"
             ItemInvoked="NavigationViewControl_ItemInvoked">
             <NavigationView.MenuItems>

@@ -15,7 +15,7 @@ namespace MicaMatherialGhibli.ViewModel
         public ObservableCollection<Movie> moviesCollection = new ObservableCollection<Movie>();
         private readonly IMoviesCollectionService singleIdService = Ioc.Default.GetRequiredService<IMoviesCollectionService>();
         private readonly ISingleMovieService allMoviesService = Ioc.Default.GetRequiredService<ISingleMovieService>();
-        private readonly List<string> idsCollection = new List<string>();
+
 
         public MovieViewModel()
         {

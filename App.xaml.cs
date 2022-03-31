@@ -1,4 +1,5 @@
-﻿using MicaMatherialGhibli.Services;
+﻿using MicaMatherialGhibli.Model;
+using MicaMatherialGhibli.Services;
 using MicaMatherialGhibli.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Toolkit.Mvvm.DependencyInjection;
@@ -12,6 +13,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -37,6 +39,8 @@ namespace MicaMatherialGhibli
             this.Suspending += OnSuspending;
         }
 
+        
+
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
         /// will be used such as when the application is launched to open a specific file.
@@ -49,7 +53,7 @@ namespace MicaMatherialGhibli
                 .AddSingleton<MovieViewModel>()
                 .AddSingleton(RestService.For<IMoviesCollectionService>("https://ghibliapi.herokuapp.com/"))
                 .AddSingleton(RestService.For<ISingleMovieService>("https://ghibliapi.herokuapp.com/"))
-                .BuildServiceProvider());
+                .BuildServiceProvider()) ;
 
             Frame rootFrame = Window.Current.Content as Frame;
 
@@ -63,6 +67,7 @@ namespace MicaMatherialGhibli
                 rootFrame = new Frame();
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
+                rootFrame.Navigated += OnNavigated;
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
@@ -71,6 +76,13 @@ namespace MicaMatherialGhibli
 
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
+
+                SystemNavigationManager.GetForCurrentView().BackRequested += App_BackRequested;
+
+                SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
+                    rootFrame.CanGoBack ?
+                    AppViewBackButtonVisibility.Visible :
+                    AppViewBackButtonVisibility.Collapsed;
             }
 
             if (e.PrelaunchActivated == false)
@@ -85,6 +97,25 @@ namespace MicaMatherialGhibli
                 // Ensure the current window is active
                 Window.Current.Activate();
             }
+        }
+
+        private void App_BackRequested(object sender, BackRequestedEventArgs e)
+        {
+            Frame rootFrame = Window.Current.Content as Frame;
+
+            if (rootFrame.CanGoBack)
+            {
+                e.Handled = true;
+                rootFrame.GoBack();
+            }
+        }
+
+        private void OnNavigated(object sender, NavigationEventArgs e)
+        {
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
+                ((Frame)sender).CanGoBack ?
+                AppViewBackButtonVisibility.Visible :
+                AppViewBackButtonVisibility.Collapsed;
         }
 
         /// <summary>

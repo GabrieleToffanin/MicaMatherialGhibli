@@ -33,7 +33,6 @@ namespace MicaMatherialGhibli.Controls
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-
             movieData = (Movie)e.Parameter;
         }
     }

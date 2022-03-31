@@ -96,6 +96,7 @@
                             FontFamily="Cascadia Code"
                             FontSize="15"
                             Text="{x:Bind movieData.producer}" />
+
                     </StackPanel>
                 </Frame>
             </Grid>
