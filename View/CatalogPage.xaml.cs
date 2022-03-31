@@ -39,5 +39,22 @@ namespace MicaMatherialGhibli.View
         {
             this.Frame.Navigate(typeof(SingleMovieControl), e.ClickedItem as Movie, new SuppressNavigationTransitionInfo());
         }
+
+        private void AutoSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
+        {
+            var selectedItem = (args.SelectedItem as Movie).title.ToString();
+            sender.Text = selectedItem;
+        }
+
+        private void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            if(args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
+            {
+                List<Movie> dataSet = ViewModel.moviesCollection.Where(x => x.title.StartsWith(sender.Text)).ToList();
+
+                ItemCollection.ItemsSource = dataSet;
+                sender.ItemsSource = dataSet;
+            }
+        }
     }
 }
