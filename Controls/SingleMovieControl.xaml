@@ -2,8 +2,11 @@
     x:Class="MicaMatherialGhibli.Controls.SingleMovieControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:interaction="using:Microsoft.Xaml.Interactivity"
     xmlns:local="using:MicaMatherialGhibli.Controls"
+    xmlns:local1="using:MicaMatherialGhibli.Model"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     Background="{StaticResource SystemControlPageBackgroundTransparentBrush}"
@@ -18,9 +21,13 @@
             TintOpacity="0.9" />
     </Page.Resources>
 
+    <!--<interaction:Interaction.Behaviors>
+        <core:EventTriggerBehavior EventName="Loaded">
+            <core:InvokeCommandAction Command="{x:Bind ViewModel.LoadPeopleAsyncRelayCommand}" />
+        </core:EventTriggerBehavior>
+    </interaction:Interaction.Behaviors>-->
 
-
-    <Grid>
+    <Grid Margin="50">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -38,21 +45,23 @@
             Grid.Row="1"
             Grid.RowSpan="2"
             Margin="20,100,100,0">
-            <Grid>
+            <Grid MaxHeight="500">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Frame
                     Grid.Column="0"
-                    Height="500"
-                    Margin="20"
+                    Margin="0,0,20,0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"
                     CornerRadius="15">
                     <Image Source="{x:Bind movieData.image}" />
                 </Frame>
-                <Frame Grid.Column="1" BorderBrush="Black">
+                <Frame
+                    Grid.Column="1"
+                    Margin="0,0,200,0"
+                    BorderBrush="Black">
                     <StackPanel>
                         <TextBlock
                             Margin="0,0,0,50"
@@ -101,6 +110,11 @@
                 </Frame>
             </Grid>
         </StackPanel>
+
+
+        <local:PeopleContentVIew Grid.Row="2" ItemsToPass="{x:Bind currentMoviePeople}" />
+
+
 
     </Grid>
 </Page>

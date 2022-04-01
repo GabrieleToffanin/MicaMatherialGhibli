@@ -1,0 +1,66 @@
+﻿<Page
+    x:Class="MicaMatherialGhibli.Controls.PeopleContentVIew"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:MicaMatherialGhibli.Controls"
+    xmlns:local1="using:MicaMatherialGhibli.Model"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    mc:Ignorable="d">
+
+    <Grid>
+        <TextBlock
+            Margin="0,180,0,0"
+            FontFamily="Cascadia Code"
+            FontSize="25"
+            FontWeight="ExtraBold"
+            Text="Movie Characters" />
+        <FlipView
+            x:Name="PeopleFlipView"
+            MaxHeight="350"
+            Margin="0,220,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Background="{ThemeResource SystemControlAcrylicElementMediumHighBrush}"
+            ItemsSource="{x:Bind ItemsToPass, Mode=OneWay}">
+            <FlipView.ItemTemplate>
+                <DataTemplate x:DataType="local1:People">
+                    <Frame Margin="50" Background="{ThemeResource SystemControlAcrylicElementBrush}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <TextBlock
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Margin="10"
+                                Text="Name:" />
+                            <TextBlock
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Margin="10"
+                                Text="{x:Bind name}" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Margin="10"
+                                Text="Gender :" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Margin="10"
+                                Text="{x:Bind gender}" />
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </FlipView.ItemTemplate>
+        </FlipView>
+    </Grid>
+</Page>

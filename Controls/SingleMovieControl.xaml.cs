@@ -1,6 +1,10 @@
 ﻿using MicaMatherialGhibli.Model;
+using MicaMatherialGhibli.ViewModel;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Toolkit.Mvvm.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -26,14 +30,35 @@ namespace MicaMatherialGhibli.Controls
         public SingleMovieControl()
         {
             this.InitializeComponent();
+            this.DataContext = Ioc.Default.GetRequiredService<PeopleViewModel>();
+            
         }
 
+        public PeopleViewModel ViewModel => (DataContext as PeopleViewModel);
+        public ObservableCollection<People> currentMoviePeople { get; set; } = new ObservableCollection<People>();
         public Movie movieData { get; set; }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
             movieData = (Movie)e.Parameter;
+            LoadPeopleForCurrentMovie();
         }
+            
+        private void LoadPeopleForCurrentMovie()
+        {
+            foreach(var item in ViewModel.peopleCollection)
+            {
+                var person = item as People;
+                var personMovie = person.films[0].Split('/');
+
+                if(movieData.id == personMovie[ personMovie.Length - 1])
+                {
+                    currentMoviePeople.Add(person);
+                }
+            }
+        }
+
+        
     }
 }
