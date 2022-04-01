@@ -31,6 +31,9 @@ namespace MicaMatherialGhibli
         public MainPage()
         {
             this.InitializeComponent();
+
+            this.navigationFrame.Navigate(typeof(CatalogPage), null, new SlideNavigationTransitionInfo());
+            NavigationViewControl.Header = "GhibliStudio";
         }
         
 
@@ -38,11 +41,18 @@ namespace MicaMatherialGhibli
         {
             FrameNavigationOptions navigationOptions = new FrameNavigationOptions();
             navigationOptions.TransitionInfoOverride = args.RecommendedNavigationTransitionInfo;
-
             var selectedItem = sender.SelectedItem as NavigationViewItem;
 
-            if (selectedItem.Tag.ToString() == "CatalogPage")
+            if (args.IsSettingsInvoked)
+            {
+                navigationFrame.Navigate(typeof(SettingsPage), null, new DrillInNavigationTransitionInfo());
+                sender.Header = "Settings";
+            }
+            else if (selectedItem.Tag.ToString().Equals("Catalog"))
+            {
                 navigationFrame.Navigate(typeof(CatalogPage), null, new DrillInNavigationTransitionInfo());
+                sender.Header = (sender.SelectedItem as NavigationViewItem).Content.ToString();
+            }
 
         }
 

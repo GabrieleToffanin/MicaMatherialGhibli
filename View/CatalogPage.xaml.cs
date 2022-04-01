@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using MicaMatherialGhibli.Controls;
 using Windows.UI.Xaml.Navigation;
+using System.Collections.ObjectModel;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -52,7 +53,9 @@ namespace MicaMatherialGhibli.View
         {
             if(args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
             {
-                List<Movie> dataSet = ViewModel.moviesCollection.Where(x => x.title.StartsWith(sender.Text)).ToList();
+                List<Movie> dataSet = ViewModel.moviesCollection.Where(x => x.title.ToUpperInvariant().StartsWith(sender.Text.ToUpperInvariant())).ToList();
+
+
 
                 ItemCollection.ItemsSource = dataSet;
                 sender.ItemsSource = dataSet;

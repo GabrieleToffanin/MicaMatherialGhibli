@@ -34,8 +34,9 @@
                     x:Name="AppTitle"
                     Margin="12,0,0,0"
                     VerticalAlignment="Center"
+                    FontSize="20"
                     Style="{StaticResource CaptionTextBlockStyle}"
-                    Text="Ghibli Studio" />
+                    Text="Movie Finder" />
             </StackPanel>
         </Border>
         <NavigationView
@@ -44,14 +45,38 @@
             Canvas.ZIndex="0"
             IsBackButtonVisible="Visible"
             IsBackEnabled="True"
-            IsSettingsVisible="False"
-            ItemInvoked="NavigationViewControl_ItemInvoked">
+            IsSettingsVisible="True"
+            ItemInvoked="NavigationViewControl_ItemInvoked"
+            PaneDisplayMode="LeftCompact">
             <NavigationView.MenuItems>
+                <NavigationViewItemHeader Content="Production Houses" />
                 <NavigationViewItem
-                    Content="Catalog"
+                    Content="Ghibli Studio"
                     Icon="Library"
-                    Tag="CatalogPage" />
+                    Tag="Catalog" />
             </NavigationView.MenuItems>
+            <NavigationView.Header>
+                <DataTemplate>
+                    <TextBlock
+                        x:Name="appTitle"
+                        VerticalAlignment="Center"
+                        FontSize="28"
+                        Style="{StaticResource TitleTextBlockStyle}"
+                        Text="{Binding}" />
+                </DataTemplate>
+            </NavigationView.Header>
+            <NavigationView.PaneFooter>
+                <StackPanel
+                    x:Name="FooterStackPanel"
+                    Orientation="Vertical"
+                    Visibility="Visible">
+                    <NavigationViewItem
+                        AutomationProperties.Name="Account"
+                        Content="Account"
+                        Icon="Contact"
+                        Tag="Account" />
+                </StackPanel>
+            </NavigationView.PaneFooter>
             <Grid>
                 <Frame
                     x:Name="navigationFrame"
