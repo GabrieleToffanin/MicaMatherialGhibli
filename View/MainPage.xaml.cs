@@ -31,9 +31,8 @@ namespace MicaMatherialGhibli
         public MainPage()
         {
             this.InitializeComponent();
-            this.DataContext = Ioc.Default.GetRequiredService<MovieViewModel>();
         }
-        private MovieViewModel actualDataSet => (DataContext as MovieViewModel);
+        
 
         private void NavigationViewControl_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {

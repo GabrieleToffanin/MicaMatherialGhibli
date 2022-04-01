@@ -119,14 +119,20 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\PeopleContentVIew.xaml.cs">
+      <DependentUpon>PeopleContentVIew.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SingleMovieControl.xaml.cs">
       <DependentUpon>SingleMovieControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\SingleFilmID.cs" />
     <Compile Include="Model\Movie.cs" />
+    <Compile Include="Model\People.cs" />
     <Compile Include="Services\IMoviesCollectionService.cs" />
+    <Compile Include="Services\IPeapleInMovieService.cs" />
     <Compile Include="Services\ISingleMovieService.cs" />
     <Compile Include="ViewModel\MovieViewModel.cs" />
+    <Compile Include="ViewModel\PeopleViewModel.cs" />
     <Compile Include="View\CatalogPage.xaml.cs">
       <DependentUpon>CatalogPage.xaml</DependentUpon>
     </Compile>
@@ -156,6 +162,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\PeopleContentVIew.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\SingleMovieControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -177,6 +187,12 @@
       <Version>6.2.13</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Mvvm">
+      <Version>7.1.2</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Behaviors">
+      <Version>7.1.2</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls">
       <Version>7.1.2</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml">

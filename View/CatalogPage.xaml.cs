@@ -33,7 +33,9 @@ namespace MicaMatherialGhibli.View
             this.DataContext = Ioc.Default.GetRequiredService<MovieViewModel>();
         }
 
-        public MovieViewModel ViewModel => Ioc.Default.GetRequiredService<MovieViewModel>();
+        public MovieViewModel ViewModel => (DataContext as MovieViewModel);
+
+        private PeopleViewModel Loader = Ioc.Default.GetRequiredService<PeopleViewModel>();
 
         private void ItemCollection_ItemClick(object sender, ItemClickEventArgs e)
         {
