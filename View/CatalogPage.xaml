@@ -12,11 +12,11 @@
     muxc:BackdropMaterial.ApplyToRootOrPageBackground="True"
     mc:Ignorable="d">
 
-    <interaction:Interaction.Behaviors>
+    <!--<interaction:Interaction.Behaviors>
         <core:EventTriggerBehavior EventName="Loaded">
             <core:InvokeCommandAction Command="{x:Bind Loader.LoadPeopleAsyncRelayCommand}" />
         </core:EventTriggerBehavior>
-    </interaction:Interaction.Behaviors>
+    </interaction:Interaction.Behaviors>-->
 
     <Grid Margin="50,50,0,0">
         <Grid.RowDefinitions>

@@ -18,19 +18,21 @@ namespace MicaMatherialGhibli.ViewModel
         private ObservableCollection<People> peopleCollection { get; set; } = new ObservableCollection<People>();
         public ObservableCollection<People> currentMoviePeople { get; set; } = new ObservableCollection<People>();
 
-        private readonly IMoviesCollectionService singleIdService = Ioc.Default.GetRequiredService<IMoviesCollectionService>();
-        private readonly ISingleMovieService allMoviesService = Ioc.Default.GetRequiredService<ISingleMovieService>();
+        
         private readonly ISettingsService settingsService;
-        private readonly IPeapleInMovieService allPeaple = Ioc.Default.GetRequiredService<IPeapleInMovieService>();
-
+        private readonly IAPICallService apiCallService;
         public IAsyncRelayCommand LoadPeopleAsyncRelayCommand { get; }
 
-        public MovieViewModel(ISettingsService settingsService)
+        public MovieViewModel(ISettingsService settingsService, IAPICallService apiCallService)
         {
-            LoadPeopleAsyncRelayCommand = new AsyncRelayCommand(LoadAllPeople);
-            LoadAllMovies();
+            //LoadPeopleAsyncRelayCommand = new AsyncRelayCommand(LoadAllPeople);
             this.settingsService = settingsService;
+            LoadPeopleAsyncRelayCommand = new AsyncRelayCommand(LoadPeopleForCurrentMovie);
+            this.apiCallService = apiCallService;
+            apiCallService.LoadAllMovies(moviesCollection: moviesCollection);
+            apiCallService.LoadAllPeople(peopleCollection: peopleCollection);
             selectedMovie = settingsService.GetValue<Movie>(nameof(SelectedMovie));
+
         }
 
         private Movie selectedMovie;
@@ -41,50 +43,13 @@ namespace MicaMatherialGhibli.ViewModel
             set => SetProperty(ref selectedMovie, value);
         }
 
-
-
-        private async void LoadAllMovies()
+        private Task LoadPeopleForCurrentMovie()
         {
-            moviesCollection.Clear();
-
-            var response = await singleIdService.getAllMoviesID();
-
-            foreach (var item in response)
-            {
-
-                var result = await allMoviesService.LoadMoviesAsync(item.id);
-
-                moviesCollection.Add(result);
-            }
-
+            apiCallService.LoadPeopleForCurrentMovie(peopleCollection, SelectedMovie, currentMoviePeople);
+            return null;
         }
-
-
-        public async Task LoadAllPeople()
-        {
-            var response = await allPeaple.FindAllPeople();
-            foreach (var item in response)
-                peopleCollection.Add(item);
-
-            LoadPeopleForCurrentMovie();
-        }
-
-        private void LoadPeopleForCurrentMovie()
-        {
-            foreach (var item in peopleCollection)
-            {
-                var person = item as People;
-                var personMovie = person.films[0].Split('/');
-
-                if (SelectedMovie is null) return;
-
-                else if (SelectedMovie.id == personMovie[personMovie.Length - 1])
-                {
-                    currentMoviePeople.Add(person);
-                }
-
-            }
-        }
+        
+        
 
 
 

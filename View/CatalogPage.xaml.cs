@@ -36,8 +36,6 @@ namespace MicaMatherialGhibli.View
 
         public MovieViewModel ViewModel => (DataContext as MovieViewModel);
 
-        private PeopleViewModel Loader = Ioc.Default.GetRequiredService<PeopleViewModel>();
-
         //private void ItemCollection_ItemClick(object sender, ItemClickEventArgs e)
         //{
         //    this.Frame.Navigate(typeof(SingleMovieControl), e.ClickedItem as Movie, new SuppressNavigationTransitionInfo());

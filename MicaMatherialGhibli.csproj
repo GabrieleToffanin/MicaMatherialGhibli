@@ -126,9 +126,11 @@
       <DependentUpon>SingleMovieControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\SingleFilmID.cs" />
+    <Compile Include="Model\ApiCallService.cs" />
     <Compile Include="Model\Movie.cs" />
     <Compile Include="Model\People.cs" />
     <Compile Include="Model\SettingsService.cs" />
+    <Compile Include="Services\IAPICallService.cs" />
     <Compile Include="Services\IMoviesCollectionService.cs" />
     <Compile Include="Services\IPeapleInMovieService.cs" />
     <Compile Include="Services\ISettingsService.cs" />
