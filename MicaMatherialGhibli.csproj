@@ -128,11 +128,12 @@
     <Compile Include="Helpers\SingleFilmID.cs" />
     <Compile Include="Model\Movie.cs" />
     <Compile Include="Model\People.cs" />
+    <Compile Include="Model\SettingsService.cs" />
     <Compile Include="Services\IMoviesCollectionService.cs" />
     <Compile Include="Services\IPeapleInMovieService.cs" />
+    <Compile Include="Services\ISettingsService.cs" />
     <Compile Include="Services\ISingleMovieService.cs" />
     <Compile Include="ViewModel\MovieViewModel.cs" />
-    <Compile Include="ViewModel\PeopleViewModel.cs" />
     <Compile Include="View\CatalogPage.xaml.cs">
       <DependentUpon>CatalogPage.xaml</DependentUpon>
     </Compile>

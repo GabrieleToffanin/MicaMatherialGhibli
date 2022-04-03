@@ -45,8 +45,10 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             IsItemClickEnabled="True"
-            ItemClick="ItemCollection_ItemClick"
-            ItemsSource="{x:Bind ViewModel.moviesCollection}">
+            ItemsSource="{x:Bind ViewModel.moviesCollection}"
+            SelectedItem="{x:Bind ViewModel.SelectedMovie, Mode=TwoWay}"
+            SelectionChanged="ItemCollection_SelectionChanged"
+            SelectionMode="Single">
             <GridView.ItemTemplate>
                 <DataTemplate x:Name="ImageTextDataTemplate" x:DataType="local1:Movie">
                     <StackPanel

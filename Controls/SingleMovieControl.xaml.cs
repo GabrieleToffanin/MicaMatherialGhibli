@@ -30,34 +30,20 @@ namespace MicaMatherialGhibli.Controls
         public SingleMovieControl()
         {
             this.InitializeComponent();
-            this.DataContext = Ioc.Default.GetRequiredService<PeopleViewModel>();
             
         }
 
-        public PeopleViewModel ViewModel => (DataContext as PeopleViewModel);
-        public ObservableCollection<People> currentMoviePeople { get; set; } = new ObservableCollection<People>();
+        public MovieViewModel ViewModel => (DataContext as MovieViewModel);
         public Movie movieData { get; set; }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            movieData = (Movie)e.Parameter;
-            LoadPeopleForCurrentMovie();
+            this.DataContext = (MovieViewModel)e.Parameter;
+            movieData = ViewModel.SelectedMovie;
         }
             
-        private void LoadPeopleForCurrentMovie()
-        {
-            foreach(var item in ViewModel.peopleCollection)
-            {
-                var person = item as People;
-                var personMovie = person.films[0].Split('/');
-
-                if(movieData.id == personMovie[ personMovie.Length - 1])
-                {
-                    currentMoviePeople.Add(person);
-                }
-            }
-        }
+        
 
         
     }

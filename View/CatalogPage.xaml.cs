@@ -38,10 +38,10 @@ namespace MicaMatherialGhibli.View
 
         private PeopleViewModel Loader = Ioc.Default.GetRequiredService<PeopleViewModel>();
 
-        private void ItemCollection_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            this.Frame.Navigate(typeof(SingleMovieControl), e.ClickedItem as Movie, new SuppressNavigationTransitionInfo());
-        }
+        //private void ItemCollection_ItemClick(object sender, ItemClickEventArgs e)
+        //{
+        //    this.Frame.Navigate(typeof(SingleMovieControl), e.ClickedItem as Movie, new SuppressNavigationTransitionInfo());
+        //}
 
         private void AutoSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
         {
@@ -60,6 +60,11 @@ namespace MicaMatherialGhibli.View
                 ItemCollection.ItemsSource = dataSet;
                 sender.ItemsSource = dataSet;
             }
+        }
+
+        private void ItemCollection_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(SingleMovieControl), ViewModel, new SuppressNavigationTransitionInfo());
         }
     }
 }

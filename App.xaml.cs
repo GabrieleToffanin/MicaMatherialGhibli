@@ -50,12 +50,12 @@ namespace MicaMatherialGhibli
         {
 
             Ioc.Default.ConfigureServices(new ServiceCollection()
-                .AddSingleton<MovieViewModel>()
-                .AddSingleton<PeopleViewModel>()
+                .AddTransient<MovieViewModel>()
+                .AddSingleton<ISettingsService, SettingsService>()
                 .AddSingleton(RestService.For<IPeapleInMovieService>("https://ghibliapi.herokuapp.com/"))
                 .AddSingleton(RestService.For<IMoviesCollectionService>("https://ghibliapi.herokuapp.com/"))
                 .AddSingleton(RestService.For<ISingleMovieService>("https://ghibliapi.herokuapp.com/"))
-                .BuildServiceProvider()) ;
+                .BuildServiceProvider());
 
             Frame rootFrame = Window.Current.Content as Frame;
 
