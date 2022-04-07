@@ -53,6 +53,9 @@
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>preview</LangVersion>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
     <OutputPath>bin\ARM\Release\</OutputPath>
     <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
@@ -125,12 +128,11 @@
     <Compile Include="Controls\SingleMovieControl.xaml.cs">
       <DependentUpon>SingleMovieControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Extender\MovieViewModelExtender.cs" />
     <Compile Include="Helpers\SingleFilmID.cs" />
-    <Compile Include="Model\ApiCallService.cs" />
     <Compile Include="Model\Movie.cs" />
     <Compile Include="Model\People.cs" />
     <Compile Include="Model\SettingsService.cs" />
-    <Compile Include="Services\IAPICallService.cs" />
     <Compile Include="Services\IMoviesCollectionService.cs" />
     <Compile Include="Services\IPeapleInMovieService.cs" />
     <Compile Include="Services\ISettingsService.cs" />

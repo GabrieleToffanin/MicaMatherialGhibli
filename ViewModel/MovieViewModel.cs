@@ -1,4 +1,6 @@
-﻿using MicaMatherialGhibli.Model;
+﻿using MicaMatherialGhibli.Extender;
+using MicaMatherialGhibli.Helpers;
+using MicaMatherialGhibli.Model;
 using MicaMatherialGhibli.Services;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.DependencyInjection;
@@ -14,25 +16,28 @@ namespace MicaMatherialGhibli.ViewModel
 {
     public class MovieViewModel : ObservableRecipient
     {
-        public ObservableCollection<Movie> moviesCollection = new ObservableCollection<Movie>();
-        private ObservableCollection<People> peopleCollection { get; set; } = new ObservableCollection<People>();
+        public ObservableCollection<Movie> moviesCollection { get; set; } = new ObservableCollection<Movie>();
         public ObservableCollection<People> currentMoviePeople { get; set; } = new ObservableCollection<People>();
 
-        
-        private readonly ISettingsService settingsService;
-        private readonly IAPICallService apiCallService;
-        public IAsyncRelayCommand LoadPeopleAsyncRelayCommand { get; }
+        private readonly IMoviesCollectionService _moviesCollectionService;
+        private readonly IPeapleInMovieService _peapleInMovieService;
+        private readonly ISingleMovieService _singleMovieService;
+        private readonly ISettingsService _settingsService;
+        public readonly IAsyncRelayCommand initVM;
 
-        public MovieViewModel(ISettingsService settingsService, IAPICallService apiCallService)
+        public MovieViewModel(ISettingsService settingsService, 
+                              ISingleMovieService singleMovieService,
+                              IPeapleInMovieService peapleInMovieService,
+                              IMoviesCollectionService moviesCollectionService)
         {
             //LoadPeopleAsyncRelayCommand = new AsyncRelayCommand(LoadAllPeople);
-            this.settingsService = settingsService;
-            LoadPeopleAsyncRelayCommand = new AsyncRelayCommand(LoadPeopleForCurrentMovie);
-            this.apiCallService = apiCallService;
-            apiCallService.LoadAllMovies(moviesCollection: moviesCollection);
-            apiCallService.LoadAllPeople(peopleCollection: peopleCollection);
+            _settingsService = settingsService;
+            _singleMovieService = singleMovieService;
+            _peapleInMovieService = peapleInMovieService;
+            _moviesCollectionService = moviesCollectionService;
             selectedMovie = settingsService.GetValue<Movie>(nameof(SelectedMovie));
 
+            initVM = new AsyncRelayCommand(InitViewModel);
         }
 
         private Movie selectedMovie;
@@ -42,16 +47,16 @@ namespace MicaMatherialGhibli.ViewModel
             get => selectedMovie;
             set => SetProperty(ref selectedMovie, value);
         }
-
-        private Task LoadPeopleForCurrentMovie()
+        
+       
+        private Task InitViewModel()
         {
-            apiCallService.LoadPeopleForCurrentMovie(peopleCollection, SelectedMovie, currentMoviePeople);
+            moviesCollection = (ObservableCollection<Movie>)this.LoadAllMoviesAsync(_moviesCollectionService, _singleMovieService);
+            currentMoviePeople = (ObservableCollection<People>)this.LoadCurrentMoviePeopleAsync(_peapleInMovieService);
             return null;
         }
         
         
-
-
 
     }
 }

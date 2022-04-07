@@ -36,15 +36,13 @@ namespace MicaMatherialGhibli.View
 
         public MovieViewModel ViewModel => (DataContext as MovieViewModel);
 
-        //private void ItemCollection_ItemClick(object sender, ItemClickEventArgs e)
-        //{
-        //    this.Frame.Navigate(typeof(SingleMovieControl), e.ClickedItem as Movie, new SuppressNavigationTransitionInfo());
-        //}
 
         private void AutoSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
         {
             var selectedItem = (args.SelectedItem as Movie).title.ToString();
             sender.Text = selectedItem;
+
+           
         }
 
         private void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
