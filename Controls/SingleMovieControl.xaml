@@ -21,11 +21,11 @@
             TintOpacity="0.9" />
     </Page.Resources>
 
-    <!--<interaction:Interaction.Behaviors>
+    <interaction:Interaction.Behaviors>
         <core:EventTriggerBehavior EventName="Loaded">
-            <core:InvokeCommandAction Command="{x:Bind ViewModel.LoadPeopleAsyncRelayCommand}" />
+            <core:InvokeCommandAction Command="{x:Bind ViewModel.LoadPeopleForCurrentMovieAsyncRelayCommand}" />
         </core:EventTriggerBehavior>
-    </interaction:Interaction.Behaviors>-->
+    </interaction:Interaction.Behaviors>
 
     <Grid Margin="50">
         <Grid.RowDefinitions>

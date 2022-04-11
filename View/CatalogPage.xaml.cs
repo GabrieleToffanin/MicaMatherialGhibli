@@ -34,7 +34,7 @@ namespace MicaMatherialGhibli.View
             this.DataContext = Ioc.Default.GetRequiredService<MovieViewModel>();
         }
 
-        public MovieViewModel ViewModel => (DataContext as MovieViewModel);
+        public MovieViewModel ViewModel => (MovieViewModel)DataContext;
 
 
         private void AutoSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)

@@ -25,7 +25,7 @@ namespace MicaMatherialGhibli.Extender
         {
             var result = await moviesCollectionService.getAllMoviesID();
             
-
+            
             foreach (var item in result)
                 yield return await singleMovieService.LoadMoviesAsync(item.id);
         }
@@ -34,28 +34,15 @@ namespace MicaMatherialGhibli.Extender
                                                                                  IPeapleInMovieService peapleInMovieService)
         {
             var result = await peapleInMovieService.FindAllPeople();
-            
+            var currentMovie = vm.SelectedMovie;
 
             foreach(var element in result)
             {
-                yield return element;
-            }
-        }
-
-        public static IEnumerable<People> GetCurrentIdMovieFromSelectedMovie(this MovieViewModel vm)
-        {
-            var currentMovie = vm.SelectedMovie;
-
-            foreach(var item in vm.currentMoviePeople)
-            {
-                var currentID = item.films[0].Split("/");
+                var currentID = element.films[0].Split("/");
 
                 if (currentMovie.id.Equals(currentID[currentID.Length - 1]))
-                    yield return item;
+                    yield return element;
             }
         }
-
-
-        
     }
 }

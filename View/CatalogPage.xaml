@@ -14,7 +14,7 @@
 
     <interaction:Interaction.Behaviors>
         <core:EventTriggerBehavior EventName="Loaded">
-            <core:InvokeCommandAction Command="{x:Bind ViewModel.initVM}" />
+            <core:InvokeCommandAction Command="{x:Bind ViewModel.LoadMoviesAsyncRelayCommand}" />
         </core:EventTriggerBehavior>
     </interaction:Interaction.Behaviors>
 
