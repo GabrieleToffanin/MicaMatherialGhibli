@@ -1,9 +1,4 @@
 ﻿using MicaMatherialGhibli.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.Foundation.Collections;
 using Windows.Storage;
 
@@ -14,7 +9,7 @@ namespace MicaMatherialGhibli.Model
         private readonly IPropertySet SettingsStorage = ApplicationData.Current.LocalSettings.Values;
         public T GetValue<T>(string key)
         {
-            if(SettingsStorage.TryGetValue(key, out object value)) return (T)value;
+            if (SettingsStorage.TryGetValue(key, out object value)) return (T)value;
             return default;
         }
 

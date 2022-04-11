@@ -1,16 +1,11 @@
-﻿ using MicaMatherialGhibli.Extender;
-using MicaMatherialGhibli.Helpers;
+﻿using MicaMatherialGhibli.Extender;
 using MicaMatherialGhibli.Model;
 using MicaMatherialGhibli.Services;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
-using Microsoft.Toolkit.Mvvm.DependencyInjection;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MicaMatherialGhibli.ViewModel
@@ -27,7 +22,7 @@ namespace MicaMatherialGhibli.ViewModel
         public readonly IAsyncRelayCommand LoadMoviesAsyncRelayCommand;
         public readonly IAsyncRelayCommand LoadPeopleForCurrentMovieAsyncRelayCommand;
 
-        public MovieViewModel(ISettingsService settingsService, 
+        public MovieViewModel(ISettingsService settingsService,
                               ISingleMovieService singleMovieService,
                               IPeapleInMovieService peapleInMovieService,
                               IMoviesCollectionService moviesCollectionService)
@@ -39,18 +34,9 @@ namespace MicaMatherialGhibli.ViewModel
             _peapleInMovieService = peapleInMovieService;
             _moviesCollectionService = moviesCollectionService;
             selectedMovie = settingsService.GetValue<Movie>(nameof(SelectedMovie));
-            try
-            {
 
 
-                
-                //currentMoviePeople.Add(this.LoadCurrentMoviePeopleAsync(_peapleInMovieService).GetAsyncEnumerator().Current);
-            }
-            catch(Exception er)
-            {
-                Debug.WriteLine(er.Message);
-            }
-            //initVM = new AsyncRelayCommand(InitViewModel);
+           
         }
 
         private Movie selectedMovie;
@@ -60,29 +46,17 @@ namespace MicaMatherialGhibli.ViewModel
             get => selectedMovie;
             set => SetProperty(ref selectedMovie, value);
         }
-        
-       
-        private async Task InitMoviesCollection()
-        {
-            var results = this.LoadAllMoviesAsync(_moviesCollectionService, _singleMovieService);
 
-            await foreach (var item in results)
-            {
-                moviesCollection.Add(item);
-            }
-        }
 
-        private async Task InitCurrentPeopleForMovieCollection()
-        {
-            var results = this.LoadCurrentMoviePeopleAsync(_peapleInMovieService);
+        public async Task InitMoviesCollection() => 
+            await this.LoadAllMoviesAsync(_moviesCollectionService, _singleMovieService);
+        
 
-            await foreach(var item in results)
-            {
-                currentMoviePeople.Add(item);
-            }
-        }
+        public async Task InitCurrentPeopleForMovieCollection() => 
+            await this.LoadCurrentMoviePeopleAsync(_peapleInMovieService);
         
-        
+
+
 
     }
 }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MicaMatherialGhibli.Model
+﻿namespace MicaMatherialGhibli.Model
 {
     public class People
     {
@@ -17,7 +11,7 @@ namespace MicaMatherialGhibli.Model
         public string[] films { get; set; }
         public string species { get; set; }
         public string url { get; set; }
-        
+
 
     }
 }

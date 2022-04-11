@@ -1,21 +1,5 @@
 ﻿using MicaMatherialGhibli.View;
-using MicaMatherialGhibli.ViewModel;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Toolkit.Mvvm.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Core;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
@@ -35,7 +19,7 @@ namespace MicaMatherialGhibli
             this.navigationFrame.Navigate(typeof(CatalogPage), null, new SlideNavigationTransitionInfo());
             NavigationViewControl.Header = "GhibliStudio";
         }
-        
+
 
         private void NavigationViewControl_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
@@ -75,6 +59,6 @@ namespace MicaMatherialGhibli
             return true;
         }
 
-        
+
     }
 }
