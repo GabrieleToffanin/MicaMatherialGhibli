@@ -8,10 +8,13 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     muxc:BackdropMaterial.ApplyToRootOrPageBackground="True"
+    RequestedTheme="Dark"
     mc:Ignorable="d">
     <Page.Resources>
         <!--  This top margin is the height of the custom TitleBar  -->
         <Thickness x:Key="NavigationViewContentMargin">0,48,0,0</Thickness>
+        <Thickness x:Key="NavigationViewContentGridBorderThickness">0</Thickness>
+        <SolidColorBrush x:Key="NavigationViewContentBackground" Color="Transparent" />
     </Page.Resources>
     <Grid>
         <Border
@@ -42,12 +45,19 @@
         <NavigationView
             x:Name="NavigationViewControl"
             BackRequested="NavigationViewControl_BackRequested"
-            Canvas.ZIndex="0"
+            FocusVisualPrimaryBrush="#FF230B66"
             IsBackButtonVisible="Visible"
             IsBackEnabled="True"
             IsSettingsVisible="True"
             ItemInvoked="NavigationViewControl_ItemInvoked"
-            PaneDisplayMode="LeftCompact">
+            PaneDisplayMode="Auto"
+            RequestedTheme="Dark">
+            <NavigationView.Background>
+                <AcrylicBrush
+                    BackgroundSource="Backdrop"
+                    TintColor="Black"
+                    TintOpacity="0.96" />
+            </NavigationView.Background>
             <NavigationView.MenuItems>
                 <NavigationViewItemHeader Content="Production Houses" />
                 <NavigationViewItem
@@ -78,10 +88,28 @@
                 </StackPanel>
             </NavigationView.PaneFooter>
             <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
                 <Frame
                     x:Name="navigationFrame"
+                    Grid.RowSpan="4"
+                    Margin="10"
                     muxc:BackdropMaterial.ApplyToRootOrPageBackground="True"
-                    Tag="CatalogPage" />
+                    CornerRadius="25"
+                    Opacity="0.87"
+                    Tag="CatalogPage">
+                    <Frame.Background>
+                        <LinearGradientBrush StartPoint="1,0" EndPoint="0.25,0.75">
+                            <GradientStop Offset="0.4" Color="Pink" />
+                            <GradientStop Offset="0.05" Color="#FFEDF02E" />
+                        </LinearGradientBrush>
+                    </Frame.Background>
+                </Frame>
+
             </Grid>
         </NavigationView>
     </Grid>

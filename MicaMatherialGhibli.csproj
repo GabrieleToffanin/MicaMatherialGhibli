@@ -133,10 +133,12 @@
     <Compile Include="Model\Movie.cs" />
     <Compile Include="Model\People.cs" />
     <Compile Include="Model\SettingsService.cs" />
+    <Compile Include="Services\IApiServices.cs" />
     <Compile Include="Services\IMoviesCollectionService.cs" />
     <Compile Include="Services\IPeapleInMovieService.cs" />
     <Compile Include="Services\ISettingsService.cs" />
     <Compile Include="Services\ISingleMovieService.cs" />
+    <Compile Include="Services\APIServices.cs" />
     <Compile Include="ViewModel\MovieViewModel.cs" />
     <Compile Include="View\CatalogPage.xaml.cs">
       <DependentUpon>CatalogPage.xaml</DependentUpon>

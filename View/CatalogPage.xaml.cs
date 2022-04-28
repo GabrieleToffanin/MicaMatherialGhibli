@@ -29,8 +29,6 @@ namespace MicaMatherialGhibli.View
         {
             var selectedItem = (args.SelectedItem as Movie).title.ToString();
             sender.Text = selectedItem;
-
-
         }
 
         private void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
@@ -38,8 +36,6 @@ namespace MicaMatherialGhibli.View
             if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
             {
                 List<Movie> dataSet = ViewModel.moviesCollection.Where(x => x.title.ToUpperInvariant().StartsWith(sender.Text.ToUpperInvariant())).ToList();
-
-
 
                 ItemCollection.ItemsSource = dataSet;
                 sender.ItemsSource = dataSet;

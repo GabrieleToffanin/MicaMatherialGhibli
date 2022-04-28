@@ -21,10 +21,10 @@ namespace MicaMatherialGhibli.Extender
         {
             
             var result = await moviesCollectionService.getAllMoviesID();
-
-
             foreach (var item in result)
-                vm.moviesCollection.Add(await singleMovieService.LoadMoviesAsync(item.id)); 
+                vm.moviesCollection.Add(await singleMovieService.LoadMoviesAsync(item.id));
+
+                    
         }
 
         public static async Task LoadCurrentMoviePeopleAsync(this MovieViewModel vm,
@@ -41,8 +41,6 @@ namespace MicaMatherialGhibli.Extender
                 if (currentMovie.id.Equals(currentID[currentID.Length - 1]))
                     vm.currentMoviePeople.Add(element);
             }
-
-            
         }
     }
 }

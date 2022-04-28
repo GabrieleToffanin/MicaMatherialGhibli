@@ -15,28 +15,21 @@ namespace MicaMatherialGhibli.ViewModel
         public ObservableCollection<Movie> moviesCollection { get; set; } = new ObservableCollection<Movie>();
         public ObservableCollection<People> currentMoviePeople { get; set; } = new ObservableCollection<People>();
 
-        private readonly IMoviesCollectionService _moviesCollectionService;
-        private readonly IPeapleInMovieService _peapleInMovieService;
-        private readonly ISingleMovieService _singleMovieService;
+        
         private readonly ISettingsService _settingsService;
+        private readonly IApiServices _apiServices;
         public readonly IAsyncRelayCommand LoadMoviesAsyncRelayCommand;
         public readonly IAsyncRelayCommand LoadPeopleForCurrentMovieAsyncRelayCommand;
 
         public MovieViewModel(ISettingsService settingsService,
-                              ISingleMovieService singleMovieService,
-                              IPeapleInMovieService peapleInMovieService,
-                              IMoviesCollectionService moviesCollectionService)
+                              IApiServices apiServices)
         {
             LoadMoviesAsyncRelayCommand = new AsyncRelayCommand(InitMoviesCollection);
             LoadPeopleForCurrentMovieAsyncRelayCommand = new AsyncRelayCommand(InitCurrentPeopleForMovieCollection);
             _settingsService = settingsService;
-            _singleMovieService = singleMovieService;
-            _peapleInMovieService = peapleInMovieService;
-            _moviesCollectionService = moviesCollectionService;
+            _apiServices = apiServices;
             selectedMovie = settingsService.GetValue<Movie>(nameof(SelectedMovie));
 
-
-           
         }
 
         private Movie selectedMovie;
@@ -48,16 +41,18 @@ namespace MicaMatherialGhibli.ViewModel
         }
 
 
-        public async Task InitMoviesCollection() => 
-            await this.LoadAllMoviesAsync(_moviesCollectionService, _singleMovieService);
-        
-
-        public async Task InitCurrentPeopleForMovieCollection() => 
-            await this.LoadCurrentMoviePeopleAsync(_peapleInMovieService);
-        
+        public async Task InitMoviesCollection()
+        { 
+            foreach(var item in await _apiServices.LoadAllMoviesAsync())
+                moviesCollection.Add(item);
+        }
 
 
-
+        public async Task InitCurrentPeopleForMovieCollection()
+        {
+            foreach(var item in await _apiServices.LoadCurrentMoviePeopleAsync(this.SelectedMovie)) 
+                currentMoviePeople.Add(item);
+        }
     }
 }
 
