@@ -128,7 +128,6 @@
     <Compile Include="Controls\SingleMovieControl.xaml.cs">
       <DependentUpon>SingleMovieControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Extender\MovieViewModelExtender.cs" />
     <Compile Include="Helpers\SingleFilmID.cs" />
     <Compile Include="Model\Movie.cs" />
     <Compile Include="Model\People.cs" />
