@@ -2,6 +2,7 @@
 using MicaMatherialGhibli.Services;
 using MicaMatherialGhibli.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Toolkit.Mvvm.DependencyInjection;
 using Refit;
 using System;

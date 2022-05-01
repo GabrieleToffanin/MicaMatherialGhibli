@@ -215,6 +215,9 @@
     <PackageReference Include="Refit">
       <Version>6.3.2</Version>
     </PackageReference>
+    <PackageReference Include="System.Runtime.Caching">
+      <Version>6.0.0</Version>
+    </PackageReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

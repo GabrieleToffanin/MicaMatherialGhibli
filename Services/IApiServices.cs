@@ -11,7 +11,7 @@ namespace MicaMatherialGhibli.Services
     public interface IApiServices
     {
         Task<IEnumerable<Movie>> LoadAllMoviesAsync();
-        Task<IEnumerable<People>> LoadCurrentMoviePeopleAsync(Movie movie);
+        IAsyncEnumerable<People> LoadCurrentMoviePeopleAsync(Movie movie);
 
     }
 }

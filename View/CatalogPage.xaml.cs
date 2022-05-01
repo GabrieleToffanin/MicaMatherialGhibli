@@ -35,7 +35,7 @@ namespace MicaMatherialGhibli.View
         {
             if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
             {
-                List<Movie> dataSet = ViewModel.moviesCollection.Where(x => x.title.ToUpperInvariant().StartsWith(sender.Text.ToUpperInvariant())).ToList();
+                List<Movie> dataSet = ViewModel.moviesCollection.Where(x => x.title.ToUpper().StartsWith(sender.Text.ToUpper())).ToList();
 
                 ItemCollection.ItemsSource = dataSet;
                 sender.ItemsSource = dataSet;

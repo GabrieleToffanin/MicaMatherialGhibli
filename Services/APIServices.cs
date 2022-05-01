@@ -27,17 +27,15 @@ namespace MicaMatherialGhibli.Services
         }
         public async Task<IEnumerable<Movie>> LoadAllMoviesAsync()
         {
-            var current = await _moviesCollectionService.getAllMoviesID().ConfigureAwait(false);
+            var current = (await _moviesCollectionService.getAllMoviesID().ConfigureAwait(false)).Select( x => x.id);
 
-            var ids = current.Select(x => x.id);
-
-            foreach(var id in ids)
+            foreach(var id in current)
                 movies.Add(Task.Run( () => _singleMovieService.LoadMoviesAsync(id)));
 
             return await Task.WhenAll(movies);
         }
 
-        public async Task<IEnumerable<People>> LoadCurrentMoviePeopleAsync(Movie movie)
+        public async IAsyncEnumerable<People> LoadCurrentMoviePeopleAsync(Movie movie)
         {
             
             var result = await _peopleInMovieService.FindAllPeople();
@@ -47,12 +45,10 @@ namespace MicaMatherialGhibli.Services
                 var currentID = item.films[0].Split("/");
                 if (movie.id.Equals(currentID[currentID.Length - 1]))
                 {
-                    people.Add(item);
+                    yield return item;
                 }
                     
             }
-
-            return people;
         }
     }
 }

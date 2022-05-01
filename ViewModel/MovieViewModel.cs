@@ -50,7 +50,7 @@ namespace MicaMatherialGhibli.ViewModel
 
         public async Task InitCurrentPeopleForMovieCollection()
         {
-            foreach(var item in await _apiServices.LoadCurrentMoviePeopleAsync(this.SelectedMovie)) 
+            await foreach(var item in _apiServices.LoadCurrentMoviePeopleAsync(this.SelectedMovie)) 
                 currentMoviePeople.Add(item);
         }
     }
